@@ -1,5 +1,5 @@
 #!/bin/bash
-./gradlew clean build -x test
+mvn clean package
 cd docker || exit
 docker-compose down -v
 docker-compose up --build

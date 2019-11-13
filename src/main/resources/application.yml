@@ -21,9 +21,9 @@ spring:
 spring.profiles: dev
 
 #below is config for Docker compose
-#ENV_DATASOURCE_URL: jdbc:postgresql://postgres/store
+ENV_DATASOURCE_URL: jdbc:postgresql://postgres/store
 #below is config for postgresql in local windows
-ENV_DATASOURCE_URL: jdbc:postgresql://localhost:5432/store
+#ENV_DATASOURCE_URL: jdbc:postgresql://localhost:5432/store
 ENV_DATASOURCE_SERVICE_USERNAME: dbuser
 ENV_DATASOURCE_SERVICE_PASSWORD: password
 ENV_DRIVER_CLASS_NAME: org.postgresql.Driver
