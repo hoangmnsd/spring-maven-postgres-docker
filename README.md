@@ -57,5 +57,60 @@ if `success`:
 }
 ```
 
+### If you want to run in local windows machine
+
+Make sure you install maven, java8, Intelij IDEA, Postgresql.
+
+Config postgresql open port 5432, create database `store`, and user `dbuser`/password `password`
+
+execute below query on PgAdmin4:  
+
+```
+GRANT ALL PRIVILEGES ON DATABASE "store" TO "dbuser";
+    create table if not exists product
+    (
+      id  bigint not null constraint product_pkey primary key,
+      name  varchar(255) UNIQUE
+    );
+    CREATE SEQUENCE IF NOT EXISTS hibernate_sequence START 1;
+```
+
+Edit `src/main/resources/application.yml`, uncomment and comment like this
+
+```
+#below is config for Docker compose
+#ENV_DATASOURCE_URL: jdbc:postgresql://postgres/store
+#below is config for postgresql in local windows
+ENV_DATASOURCE_URL: jdbc:postgresql://localhost:5432/store
+```
+
+#### Run app by command  
+
+```sh
+mvn spring-boot:run
+```
+
+#### How to test on local machine
+
+Using Postman, send POST request to `http://localhost:12345/v1/product` with body:  
+```
+{"name":"product001"}
+```
+
+if `success`:  
+```
+{
+    "product": {
+        "id": 1,
+        "name": "product001",
+        "new": false
+    },
+    "result": {
+        "success": true,
+        "message": "Success"
+    }
+}
+```
+
 ### REFERENCES: 
 https://muzir.github.io/spring/docker/docker-compose/postgres/2019/03/24/Spring-Boot-Docker.html
